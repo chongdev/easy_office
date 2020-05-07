@@ -24,9 +24,38 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+               @guest
+
+               @else
+                    @if(Auth::user()->type == 1)
+                    <a class="navbar-brand ml-3" href="{{ url('/product') }}">
+                    หน้าแรก
                 </a>
+                <div class="dropdown">
+  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    จัดการ
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{{ url('admin/manageuser') }}">ข้อมูลสมาชิก</a>
+    <a class="dropdown-item" href="#"> ข้อมูลแผนก</a>
+    <a class="dropdown-item" href="#">จัดการข้อมูลตำแหน่งงาน</a>
+  </div>
+</div>
+                <a class="navbar-brand ml-3" href="{{ url('/type') }}">
+                Report
+                </a>
+                    @else
+                    <a class="navbar-brand ml-3" href="{{ url('/product') }}">
+                    Profile
+                </a>
+                <a class="navbar-brand ml-3" href="{{ url('/type') }}">
+                   asdasd
+                </a>
+                <a class="navbar-brand ml-3" href="{{ url('/store/store') }}">
+               dddd
+                </a>
+                    @endif
+               @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -44,10 +73,8 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
                         @else
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

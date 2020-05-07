@@ -25,5 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['prefix' => 'admin'], function(){
     Route::group(['middleware' => ['admin']], function(){
         Route::get('/dashboard', 'admin\AdminController@index');
+        Route::resource('/manageuser', 'admin\AddUserController');
+        Route::get('/manageuser/{id}/delete','AddUserController@delete');
     });
 });
