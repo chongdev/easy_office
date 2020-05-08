@@ -5,24 +5,31 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">สมัครสมาชิก</div>
+            <h1 style="text-align:center;">{{ !empty($data->id) ? 'แก้ไข' : 'เพิ่ม' }}ข้อมูลสมาชิก </h1>
+        @if(!empty($data->id))
+        <form action="{{ route('manageuser.update', ['id' => $data->id]) }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        {{ method_field('PUT') }}
+        @else
+       <form method="POST" action="{{ url('admin/manageuser') }}" enctype="multipart/form-data"> 
+        @endif
                 <div class="card-body">
-                    <form method="POST" action="{{ route('adduser') }}" aria-label="{{ __('adduser') }}">
                         @csrf
-                        <div class="form-group row">
+                        <div class="form-group row" >
                             <label for="name" class="col-md-4 col-form-label text-md-right">คำนำหน้าชื่อ</label>
 
                             <div class="col-md-6">
                             <select class="form-control {{ !empty( $errors->first('prefix')) ? 'is-invalid' : '' }}" name="prefix" id="prefix">
                                 <option value="" class="form-control">-เลือกคำนำหน้า-</option>
-                                <option value="นาย">นาย</option>
-                                <option value="นาง">นาง</option>
-                                <option value="นางสาว">นางสาว</option>
+                                    <option value="นาย" @if( old ('prefix')=='นาย') selected="selected" @endif>นาย</option>
+                                    <option value="นาง" @if (old('prefix') == 'นาง') selected="selected" @endif>นาง</option>
+                                    <option value="นางสาว" @if (old('prefix') == 'นางสาว') selected="selected" @endif>นางสาว</option>
+                                </select>
                                 </select>
                                 @if (!empty($errors->first('prefix')))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('prefix') }}</strong>
-                                    </span>
+                                    
+                                        <message class="text-danger">{{ $errors->first('prefix') }}</massage>
                                 @endif
                             </div>
                        
@@ -32,26 +39,23 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">ชื่อ</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->first('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}">
+                                <input id="name" type="text" class="form-control{{ $errors->first('name') ? ' is-invalid' : '' }}" name="name" value="{{ !empty($data->name) ? $data->name: old('name') }}">
 
                                 @if (!empty($errors->first('name')))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                    
+                                        <message class="text-danger">{{ $errors->first('name') }}</massage>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">นามสกุล</label>
-
                             <div class="col-md-6">
-                                <input id="lastname" type="text" class="form-control{{ $errors->first('lastname') ? ' is-invalid' : '' }}" name="lastname" value="{{ old('lastname') }}">
+                                <input id="lastname" type="text" class="form-control{{ $errors->first('lastname') ? ' is-invalid' : '' }}" name="lastname" value="{{ !empty($data->lastname) ? $data->lastname: old('lastname') }}">
 
                                 @if ($errors->first('lastname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('lastname') }}</strong>
-                                    </span>
+                                    
+                                        <message class="text-danger">{{ $errors->first('lastname') }}</massage>
                                 @endif
                             </div>
                         </div>
@@ -60,12 +64,30 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">ตำแหน่งงาน</label>
 
                             <div class="col-md-6">
-                                <input id="position" type="text" class="form-control{{ $errors->first('position') ? ' is-invalid' : '' }}" name="position" value="{{ old('position') }}">
+                                <select class="form-control {{ !empty( $errors->first('position')) ? 'is-invalid' : '' }}" name="position" id="position" value="{{ !empty($data->position) ? $data->position: old('position') }}" >
+                                <option value="" class="form-control">-เลือกตำแหน่งงาน-</option>
+                                @foreach( $position AS $key => $value )
+                                @php
+                                    $sel = '';
+                                @endphp
 
+                                @if( !empty($data->position) )
+                                    @if($value->id == $data->position )
+                                        @php
+                                            $sel='selected="1"';
+                                        @endphp
+                                    @endif
+                                @endif
+                                    @if($value->id == old('position'))
+                                    @php
+                                        $sel = 'selected="1"';
+                                    @endphp  
+                                @endif     
+                                <option class="form-control" {{ $sel }} value="{{ $value->id }}"> {{ $value->name }} </option>
+                                @endforeach
+                                </select>
                                 @if ($errors->first('position'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('position') }}</strong>
-                                    </span>
+                                        <message class="text-danger">{{ $errors->first('position') }}</massage>
                                 @endif
                             </div>
                         </div>
@@ -74,12 +96,32 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">ฝ่าย/แผนก</label>
 
                             <div class="col-md-6">
-                                <input id="department" type="text" class="form-control{{ $errors->first('department') ? ' is-invalid' : '' }}" name="department" value="{{ old('department') }}">
+                            <select class="form-control {{ !empty( $errors->first('department')) ? 'is-invalid' : '' }}" name="department" id="department" value="{{ !empty($data->department) ? $data->department: old('department') }}" >
+                            <option value="" class="form-control">-เลือกตำแหน่งงาน-</option>
+                            @foreach( $department AS $key => $value )
+                            @php
+                                $sel = '';
+                            @endphp
+
+                            @if( !empty($data->department) )
+                                @if($value->id == $data->department )
+                                    @php
+                                        $sel='selected="1"';
+                                    @endphp
+                                @endif
+                            @endif
+                                @if($value->id == old('department'))
+                                @php
+                                    $sel = 'selected="1"';
+                                @endphp  
+                            @endif     
+                            <option class="form-control" {{ $sel }} value="{{ $value->id }}"> {{ $value->name }} </option>
+                            @endforeach
+                            </select>
                                 
                                 @if ($errors->first('department'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('department') }}</strong>
-                                    </span>
+                                    
+                                        <message class="text-danger">{{ $errors->first('department') }}</massage>
                                 @endif
                             </div>
                         </div>
@@ -88,12 +130,11 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->first('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" >
+                                <input id="email" type="email" class="form-control {{ $errors->first('email') ? ' is-invalid' : '' }}" name="email" value="{{ !empty($data->email) ? $data->email: old('email') }}">
 
                                 @if ($errors->first('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                    
+                                        <message class="text-danger">{{ $errors->first('email') }}</massage>
                                 @endif
                             </div>
                         </div>
@@ -102,19 +143,18 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">รหัสผ่าน</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->first('password') ? ' is-invalid' : '' }}" name="password" >
+                                <input id="password" type="password" class="form-control {{ $errors->first('password') ? ' is-invalid' : '' }}" name="password" >
                                 @if ($errors->first('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                    
+                                        <message class="text-danger">{{ $errors->first('password') }}</massage>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('รูป') }}</label>
+                            <label for="profile" class="col-md-4 col-form-label text-md-right">{{ __('รูป') }}</label>
                             <div class="col-md-6">
-                            <input type="file" name="image" class="form-control" accept="image/*" />
+                            <input type="file" name="profile" class="form-control" accept="image/*" />
                             </div>
                         </div>
 

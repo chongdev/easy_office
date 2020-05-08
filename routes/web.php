@@ -27,5 +27,7 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/dashboard', 'admin\AdminController@index');
         Route::resource('/manageuser', 'admin\AddUserController');
         Route::get('/manageuser/{id}/delete','AddUserController@delete');
+        Route::get('/manageuser/{id}/edit','AddUserController@edit');
+        Route::POST('/manageuser/{id}/update','AddUserController@update');
     });
 });

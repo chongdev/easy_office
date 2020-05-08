@@ -28,7 +28,7 @@
 
                @else
                     @if(Auth::user()->type == 1)
-                    <a class="navbar-brand ml-3" href="{{ url('/product') }}">
+                    <a class="navbar-brand ml-3" href="{{ url('admin/dashboard') }}">
                     หน้าแรก
                 </a>
                 <div class="dropdown">
@@ -101,6 +101,19 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <!-- alert -->
+        @if(session()->has('jsAlert'))
+    <script>
+        alert("{{ session()->get('jsAlert') }}");
+    </script>
+    @endif
+    <script>
+        $('.form-group row').change(function(){
+            $(this).find('.is-invalid').removeClass('is-invalid');
+            $(this).find('message').remove();
+        });
+
+    </script>
     </div>
 </body>
 </html>

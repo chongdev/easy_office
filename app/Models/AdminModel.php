@@ -8,7 +8,7 @@ class AdminModel extends Model
 {
     //
     protected $table ="users";
-    protected $fillable =["name","email","password","lastname","position","department","perfix","profile","type",];
+    protected $fillable =["name","email","password","lastname","position","department","prefix","type",];
     public $pimarykey="id";
 
     public function lists($requert){
@@ -16,6 +16,7 @@ class AdminModel extends Model
             ->select("{$this->table}.*","department.name as departmentname","position.name as positionname")
             ->leftjoin('department',"{$this->table}.department","=","department.id")
             ->leftjoin('position',"{$this->table}.position","=","position.id")
+            
             ;
     }
 }

@@ -14,7 +14,8 @@
               <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>
             </form>
         </div>
-  <a href="{{ url('product/create') }}" class="btn btn-success float-right"><i class="fa fa-plus"></i> เพิ่มข้อมูลสมาชิก</a>
+   <a href="{{ url('admin/manageuser/create') }}" class="btn btn-success float-right"><i class="fa fa-plus"></i> เพิ่มข้อมูลสินค้า</a>
+
 
 </div>
   <table class="table table-striped">
@@ -47,7 +48,8 @@
       <td class="text-center">{{ $value->positionname }}</td>
       <td class="text-center">{{ $value->departmentname }}</td>
       <td class="text-center">
-      <a href="" class="btn btn-warning"><i class="fa fa-edit"></i> แก้ไข</a>
+      <a href="{{ action('AddUserController@edit',$value->id) }}"
+                                class="btn btn-secondary">แก้ไข</a>
         <a href="" onclick="return confirm('ลบ ?')" class="btn btn-danger"><i class="fa fa-trash"></i> ลบ</a>
       </td>
     </tr>
