@@ -45,14 +45,14 @@
                 Report
                 </a>
                     @else
-                    <a class="navbar-brand ml-3" href="{{ url('/product') }}">
-                    Profile
+                    <a class="navbar-brand ml-3" href="{{ url('/home') }}">
+                    หน้าแรก
                 </a>
-                <a class="navbar-brand ml-3" href="{{ url('/type') }}">
-                   asdasd
+                <a class="navbar-brand ml-3" href="{{ url('/profile') }}">
+                   Profile
                 </a>
-                <a class="navbar-brand ml-3" href="{{ url('/store/store') }}">
-               dddd
+                <a class="navbar-brand ml-3" href="{{ url('/leave') }}">
+               การลา
                 </a>
                     @endif
                @endguest

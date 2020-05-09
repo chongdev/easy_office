@@ -125,6 +125,19 @@ class AddUserController extends Controller
     
     return view('admin/forms.formadduser')->with(['data'=>$data,'department'=>DM::get() ,'position'=>PM::get() ]);
     }
+    public function delete($id)
+    {
+        //
+        $data = GU::findOrFail($id);
+      if( is_null($data) ){
+        return back()->with('jsAlert', "ไม่พบข้อมูลที่ต้องการแก้ไข");
+    }
+    if(!empty($data->profile) ){
+      storage::disk('public')->delete( $data->profile );
+    }
+    $data->delete();
+    return back()->with('jsAlert', "ลบข้อมูลสำเร็จ");
+  }
     /**
      * Update the specified resource in storage.
      *
@@ -164,7 +177,7 @@ class AddUserController extends Controller
               $data->update();
             }
           }
-              return redirect()->route('manageuser.index')->with('jsAlert', 'เพิ่มข้อมูลสำเร็จ');
+              return redirect()->route('manageuser.index')->with('jsAlert', 'ข้อมูลสำเร็จ');
             
         }
     }
@@ -176,20 +189,11 @@ class AddUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+  
     public function destroy($id)
     {
         //
         
     }
-    public function delete($id){
-      $data = GU::findOrFail($id);
-      if(is_null($data) ){
-        return back()->with('jsAlert', "ไม่พบข้อมูล");
-      }
-      if( !empty($data->img) ){
-        storage::disk('public')->delete( $data->img );
-      }
-      $data->delete();
-      return back()->with('jsAlert', "ลบข้อมูลสำเร็จ");
-    }
+   
 }

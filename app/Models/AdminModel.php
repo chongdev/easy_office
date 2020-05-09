@@ -16,7 +16,6 @@ class AdminModel extends Model
             ->select("{$this->table}.*","department.name as departmentname","position.name as positionname")
             ->leftjoin('department',"{$this->table}.department","=","department.id")
             ->leftjoin('position',"{$this->table}.position","=","position.id")
-            
-            ;
+;
     }
 }

@@ -48,9 +48,9 @@
       <td class="text-center">{{ $value->positionname }}</td>
       <td class="text-center">{{ $value->departmentname }}</td>
       <td class="text-center">
-      <a href="{{ action('AddUserController@edit',$value->id) }}"
-                                class="btn btn-secondary">แก้ไข</a>
-        <a href="" onclick="return confirm('ลบ ?')" class="btn btn-danger"><i class="fa fa-trash"></i> ลบ</a>
+      <a href="{{ action('AddUserController@edit',$value->id) }}"class="btn btn-secondary">แก้ไข</a>
+      <a href="{{ url('admin/manageuser/delete',$value->id) }}" onclick="return confirm('ลบ ?')" class="btn btn-danger"><i class="fa fa-trash"></i> ลบ</a>
+      
       </td>
     </tr>
     @endforeach

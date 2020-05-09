@@ -8,7 +8,7 @@
             <h1 style="text-align:center;">{{ !empty($data->id) ? 'แก้ไข' : 'เพิ่ม' }}ข้อมูลสมาชิก </h1>
         @if(!empty($data->id))
         <form action="{{ route('manageuser.update', ['id' => $data->id]) }}" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         {{ method_field('PUT') }}
         @else
@@ -25,7 +25,6 @@
                                     <option value="นาย" @if( old ('prefix')=='นาย') selected="selected" @endif>นาย</option>
                                     <option value="นาง" @if (old('prefix') == 'นาง') selected="selected" @endif>นาง</option>
                                     <option value="นางสาว" @if (old('prefix') == 'นางสาว') selected="selected" @endif>นางสาว</option>
-                                </select>
                                 </select>
                                 @if (!empty($errors->first('prefix')))
                                     
