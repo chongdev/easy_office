@@ -16,7 +16,8 @@
   <table class="table table-striped">
   <thead class="text-center">
     <tr>
-      <th scope="col">ครั้งที่</th>
+      <th scope="col">No.</th>
+      <th scope="col">วันที่เขียน</th>
       <th scope="col">หัวข้อ</th>
       <th scope="col">การลา</th>
       <th scope="col">สาเหตุการลา</th>
@@ -32,6 +33,7 @@
   
     <tr>
       <th class="text-center">{{$loop->iteration }}</th>
+      <th class="text-center">{{ date('d-M-Y ', strtotime($value->date)) }}</th>
       <td class="text-center">{{ $value->Title }}</td>
       <td class="text-center">{{ $value->vacation_Name }}</td>
       <td class="text-center">{{ $value->detail }}</td>

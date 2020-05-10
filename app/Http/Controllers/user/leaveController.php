@@ -54,11 +54,11 @@ class leaveController extends Controller
     public function index()
     {
         //
-        $data = DB::table('users')
+        $data = DB::table('letter')
         ->select("*","users.id as id","users.name as username","department.name as departmentname","position.name as positionname",)
+        ->leftjoin('users',"users.id","=","letter.U_id")
         ->leftjoin('department',"department.id","=","users.department")
         ->leftjoin('position',"position.id","=","users.position")
-        ->leftjoin('letter',"letter.U_id","=","users.id")
         ->where('users.id',auth::user()->id)
         ->get();
         return view('user/leave')->with( ["data"=>$data] );

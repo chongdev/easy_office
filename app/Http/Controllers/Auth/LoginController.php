@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use auth;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -28,7 +29,14 @@ class LoginController extends Controller
     protected function redirectTo()
 {
     if(auth()->user()->isAdmin()) {
-        return '/admin/dashboard';
+        $data = DB::table('letter')
+        ->select("*","letter.id as id","users.name as username","department.name as departmentname","position.name as positionname",)
+        ->leftjoin('users',"users.id","=","letter.U_id")
+        ->leftjoin('department',"department.id","=","users.department")
+        ->leftjoin('position',"position.id","=","users.position")
+        ->where('status',"=",'รออนุมัดติ')
+        ->get();
+        return view('admin/dashboard')->with( ["data"=>$data] );
     } else {
         return '/home';
     }

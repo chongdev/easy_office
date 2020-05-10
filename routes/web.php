@@ -36,5 +36,12 @@ Route::group(['prefix' => 'admin'], function(){
         Route::resource('/manageuser', 'admin\AddUserController');
         Route::get('/manageuser/{id}/edit','AddUserController@edit');
         Route::get('/manageuser/delete/{id}', 'admin\AddUserController@delete');
+        Route::resource('/dashboard', 'admin\adminController');
+        Route::get('/dashbord/{id}/edit','admin\adminController@edit');
+        Route::get('/export', 'admin\adminController@export'); 
+        Route::get('/export_pdf', 'admin\PDFController@index'); 
+        Route::get('/export_pdf/pdf', 'admin\PDFController@pdf');
+        
+       
     });
 });
