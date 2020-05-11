@@ -34,6 +34,7 @@ class admincontroller extends Controller
         ->leftjoin('position',"position.id","=","users.position")
         ->where('status',"=",'รออนุมัดติ')
         ->get();
+        
         return view('admin/dashboard')->with( ["data"=>$data] );
     }
 
@@ -91,7 +92,17 @@ class admincontroller extends Controller
         ->leftjoin('position',"position.id","=","users.position")
         ->where('letter.id',"=",$id)
         ->get();
-    return view('admin/forms.formapprove')->with(['data'=>$data]);
+        foreach($data as $value){
+        $users = DB::table('letter')
+        ->select('vacation_Name', DB::raw('sum(alltime) as total'))
+        ->groupBy('vacation_Name')
+        ->where([
+            ['letter.U_id',"=",$value->U_id],
+            ['letter.status',"=",'อนุมัดติการลา'],
+                ])
+        ->get();
+        }
+    return view('admin/forms.formapprove')->with(['data'=>$data,'users'=>$users]);
     }
     public function delete($id)
     {

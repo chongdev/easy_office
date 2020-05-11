@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8" style="margin:30px;">
             <div class="card">
                 <div class="card-header">ข้อมูลส่วนตัว</div>
                 @csrf
                 @foreach( $data as $key => $value )
                 <div class="card-body">
-                    <div class="form-row">
+                    <div class="form-row"   >
                         <div class="form-group col-md-12">
                             @if(!empty($value->profile))
                             <div class="text-center">
@@ -21,8 +21,8 @@
                                 @endif
                             </div>
                         </div>
-
                     </div>
+                    </dv>
                     <form action="{{ action('user\UserController@update',$value->id) }}" method="post"
                         enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">
@@ -31,7 +31,7 @@
                         <div class="form-group col-md-12" style="margin-left:270px;">
                             <input type="file" name="profile" accept="image/*">
                         </div>
-                        <div class="form-row">
+                        <div class="form-row" style="padding:30px;">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
                                 <input id="email" type="email"
@@ -52,8 +52,7 @@
                                     @endif
                             </div>
                         </div>
-
-                        <div class="form-row">
+                        <div class="form-row" style="padding:30px;" >
                             <div class="form-group col-md-3">
                                 <label for="prefix">คำนำหน้าชื่อ</label>
                                 @if($value->prefix)
@@ -100,11 +99,11 @@
                                 @endif
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">บันทึก</button>
-                        @endforeach
+                        <button type="submit" style="margin-left:300px; margin-bottom:20px;" class="btn btn-primary">บันทึก</button>
                     </form>
                 </div>
-            </div>
+                @endforeach
+            </div> 
         </div>
     </div>
 </div>

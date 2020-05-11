@@ -35,7 +35,7 @@
                 <td class="text-center">{{$value->alltime}} วัน</td>
                 <td class="text-center">{{$value->status}}</td>
                 <td class="text-center">
-                <a href="{{ action('admin\adminController@edit', $value->id) }}" class="btn btn-secondary">ตรวจสอบ</a>
+                <a href="{{ action('admin\adminController@edit', $value->id, $value->U_id) }}" class="btn btn-secondary">ตรวจสอบ</a>
                 </td>
             </tr>
         </tbody>

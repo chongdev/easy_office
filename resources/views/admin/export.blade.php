@@ -7,8 +7,8 @@
             <h4>ข้อมูลการลาทั้งหมด</h4>
         </div>
         <div class="col-md-5" align="right">
-            <a href="{{ url('admin\export_pdf/pdf') }}" class="btn btn-danger">Convert into PDF</a>
-            <a href="{{ url('admin\export') }}" class="btn btn-primary">Convert into Excel</a>
+            <a href="{{ url('admin\export/pdf') }}" class="btn btn-danger">Convert into PDF</a>
+            <a href="{{ url('admin\export/excel') }}" class="btn btn-primary">Convert into Excel</a>
         </div>
     </div>
     <br />

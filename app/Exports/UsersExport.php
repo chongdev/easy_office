@@ -20,6 +20,7 @@ class UsersExport implements FromCollection
         ->leftjoin('users',"users.id","=","letter.U_id")
         ->leftjoin('department',"department.id","=","users.department")
         ->leftjoin('position',"position.id","=","users.position")
+        ->where('letter.status',"=","อนุมัดติการลา")
         ->get();
     }
     

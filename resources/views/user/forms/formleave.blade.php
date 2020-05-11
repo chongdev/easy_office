@@ -78,21 +78,24 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address">ข้าพเจ้า *</label>
-                                        <h5><p>{{ $value->prefix}} {{$value->username}} {{$value->lastname}}</p></h5>
+                                        <input type="text" class="form-control"value="{{ $value->prefix}} {{$value->username}} {{$value->lastname}}" disabled>
+                                        <h5><p></p></h5>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="date">พนักงานประจำตำแหน่ง *</label>
-                                        <h5><p for="date"> {{ $value->positionname }} </p></h5>
+                                        <input type="text" class="form-control"value="{{ $value->positionname }}" disabled>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:7px;">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="address">ฝ่าย/แผนก *</label>
-                                        <h5><p for="date"> {{ $value->departmentname }}</p></h5>
+                                        <label for="address">ฝ่าย/แผนก *</label> 
+                                        <input type="text" class="form-control"value="{{ $value->departmentname }}" disabled>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -171,41 +174,6 @@
                                             name="alltime" value="{{ !empty($data->alltime) ? $data->alltime: old('alltime') }}">
                                         @if ($errors->first('alltime'))
                                         <message class="text-danger">{{ $errors->first('alltime') }}</massage>
-                                            @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:7px;">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label for="since">โดยการลาครั้งลาสุดของข้าพเจ้าคือ วันที่ *</label>
-                                        <input id="since" type="date"
-                                            class="form-control {{ $errors->first('#') ? ' is-invalid' : '' }}"
-                                            name="#" value="">
-                                        @if ($errors->first('#'))
-                                        <message class="text-danger">{{ $errors->first('#') }}</massage>
-                                            @endif
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="date">ถึงวันที่ *</label>
-                                        <input id="todate" type="date"
-                                            class="form-control {{ $errors->first('#') ? ' is-invalid' : '' }}"
-                                            name="#">
-                                        @if ($errors->first('#'))
-                                        <message class="text-danger">{{ $errors->first('#') }}</massage>
-                                            @endif
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="since">เป็นเวลาทั่งสิ้น *</label>
-                                        <input  type="text"
-                                            class="form-control {{ $errors->first('#') ? ' is-invalid' : '' }}"
-                                            name="#" value="">
-                                        @if ($errors->first('#'))
-                                        <message class="text-danger">{{ $errors->first('#') }}</massage>
                                             @endif
                                     </div>
                                 </div>

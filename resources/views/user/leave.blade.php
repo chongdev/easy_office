@@ -42,8 +42,6 @@
       <td class="text-center">{{ $value->alltime}} วัน</td>
       <td class="text-center">{{ $value->status}}</td>
       <td class="text-center">
-      <a href="{{ action('AddUserController@edit',$value->id) }}"class="btn btn-secondary">ตรวจสอบ</a>
-
       
       </td>
     </tr>
