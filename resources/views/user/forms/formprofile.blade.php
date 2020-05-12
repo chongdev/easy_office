@@ -22,7 +22,6 @@
                             </div>
                         </div>
                     </div>
-                    </dv>
                     <form action="{{ action('user\UserController@update',$value->id) }}" method="post"
                         enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">

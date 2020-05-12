@@ -5,7 +5,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB ;
-use App\Models\AdminModel AS GU;
+use App\Models\userModel AS GU;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;

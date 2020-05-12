@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\AdminModel AS GU;
-use App\Models\departmentModel AS DM;
-use App\Models\positionModel AS PM;
+use App\Models\userModel AS UM;
 use Illuminate\Support\Facades\Storage;
 use DB;
 
@@ -77,7 +76,7 @@ class AddUserController extends Controller
             return back()->withInput()->withErrors( $validator->errors() );
           }
           else{
-          $data = new GU;
+          $data = new UM;
           $data->fill([
             "name" =>$request->name,
             "email" =>$request->email,

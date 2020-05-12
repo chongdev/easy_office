@@ -8,22 +8,25 @@
             <div class="card">
                 <div class="card-header">ฟอร์มใบลา</div>
                 @csrf
-                @foreach( $data as $key => $value )
+                @foreach($data as $key => $value) 
+
+                  @endforach
+                
                 <div class="card-body">
-                <form action="{{ action('user\leaveController@update',$value->id) }}" method="post"
+                <form action="{{ action('user\leaveController@update',auth::user()->id) }}" method="post"
                         enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         {{ method_field('PUT') }}
                         <div class="controls">
                             <div class="row" style="margin-top:7px;">
-                            <input type="hidden" name="U_id" value="{{ $value->id}}">
+                            <input type="hidden" name="U_id" value="{{ auth::user()->id}}">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address">เขียนที่ *</label>
                                         <input id="address" type="address"
                                             class="form-control {{ $errors->first('address') ? ' is-invalid' : '' }}"
-                                            name="address" value="{{ !empty($data->address) ? $data->address: old('address') }}">
+                                            name="address" value="{{ !empty(auth::user()->address) ? auth::user()->address: old('address') }}">
                                         @if ($errors->first('address'))
                                         <message class="text-danger">{{ $errors->first('address') }}</massage>
                                             @endif
@@ -34,7 +37,7 @@
                                         <label for="date">วันที่ *</label>
                                         <input id="date" type="date"
                                             class="form-control {{ $errors->first('date') ? ' is-invalid' : '' }}"
-                                            name="date" value="{{ !empty($data->date) ? $data->date: old('date') }}">
+                                            name="date" value="{{ !empty(auth::user()->date) ? auth::user()->date: old('date') }}">
                                         @if ($errors->first('date'))
                                         <message class="text-danger">{{ $errors->first('date') }}</massage>
                                             @endif
@@ -47,7 +50,7 @@
                                         <label for="form_email">เรี่องขอลา *</label>
                                         <input type="text" name="Title"
                                             class="form-control {{ !empty( $errors->first('Title')) ? 'is-invalid' : '' }}"
-                                           value="{{ !empty($data->Title) ? $data->Title: old('Title') }}">
+                                           value="{{ !empty(auth::user()->Title) ? auth::user()->Title: old('Title') }}">
                                         @if(!empty( $errors->first('Title')))
                                         <message class="text-danger">- {{ $errors->first('Title') }} </message>
                                         @endif
@@ -60,7 +63,7 @@
                                         <label for="form_email">เรียน *</label>
                                         <input type="text" name="dear"
                                             class="form-control {{ !empty( $errors->first('dear')) ? 'is-invalid' : '' }}"
-                                            value="{{ !empty($data->dear) ? $data->dear: old('dear') }}">
+                                            value="{{ !empty(auth::user()->dear) ? auth::user()->dear: old('dear') }}">
                                         @if(!empty( $errors->first('dear')))
                                         <message class="text-danger">- {{ $errors->first('dear') }} </message>
                                         @endif
@@ -78,14 +81,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address">ข้าพเจ้า *</label>
-                                        <input type="text" class="form-control"value="{{ $value->prefix}} {{$value->username}} {{$value->lastname}}" disabled>
+                                        <input type="text" class="form-control"value="{{ auth::user()->prefix}} {{auth::user()->name}} {{auth::user()->lastname}}" disabled>
                                         <h5><p></p></h5>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="date">พนักงานประจำตำแหน่ง *</label>
-                                        <input type="text" class="form-control"value="{{ $value->positionname }}" disabled>
+                                        <input type="text" class="form-control"value="{{ auth::user()->positionname }}" disabled>
                                         
                                     </div>
                                 </div>
@@ -94,7 +97,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address">ฝ่าย/แผนก *</label> 
-                                        <input type="text" class="form-control"value="{{ $value->departmentname }}" disabled>
+                                        <input type="text" class="form-control"value="{{ auth::user()->departmentname }}" disabled>
                                         
                                     </div>
                                 </div>
@@ -124,7 +127,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address">อื่นๆ โปรดระบุ *</label>
-                                        <input  type="text" class="form-control" name="etc" value="{{ !empty($data->etc) ? $data->etc: old('etc') }}">
+                                        <input  type="text" class="form-control" name="etc" value="{{ !empty(auth::user()->etc) ? auth::user()->etc: old('etc') }}">
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +138,7 @@
                                         <textarea  name="detail" class="form-control {{ !empty( $errors->first('detail')) ? 'is-invalid' : '' }}"
                                             placeholder="สาเหตุการลา *" rows="4" 
                                             data-error="Please, leave us a message.">
-                                            {{ !empty($data->detail) ? $data->detail: old('detail') }}
+                                            {{ !empty(auth::user()->detail) ? auth::user()->detail: old('detail') }}
                                             </textarea>
                                             @if(!empty( $errors->first('detail')))
                                         <message class="text-danger">- {{ $errors->first('detail') }} </message>
@@ -149,7 +152,7 @@
                                         <label for="since">ตั้งแต่วันที่ *</label>
                                         <input id="since" type="date"
                                             class="form-control {{ $errors->first('since') ? ' is-invalid' : '' }}"
-                                            name="since" value="{{ !empty($data->since) ? $data->since: old('since') }}">
+                                            name="since" value="{{ !empty(auth::user()->since) ? auth::user()->since: old('since') }}">
                                         @if ($errors->first('since'))
                                         <message class="text-danger">{{ $errors->first('since') }}</massage>
                                             @endif
@@ -160,7 +163,7 @@
                                         <label for="date">ถึงวันที่ *</label>
                                         <input id="todate" type="date"
                                             class="form-control {{ $errors->first('todate') ? ' is-invalid' : '' }}"
-                                            name="todate" value="{{ !empty($data->todate) ? $data->todate: old('todate') }}">
+                                            name="todate" value="{{ !empty(auth::user()->todate) ? auth::user()->todate: old('todate') }}">
                                         @if ($errors->first('todate'))
                                         <message class="text-danger">{{ $errors->first('todate') }}</massage>
                                             @endif
@@ -171,7 +174,7 @@
                                         <label for="since">เป็นเวลาทั่งสิ้น *</label>
                                         <input id="since" type="text"
                                             class="form-control {{ $errors->first('alltime') ? ' is-invalid' : '' }}"
-                                            name="alltime" value="{{ !empty($data->alltime) ? $data->alltime: old('alltime') }}">
+                                            name="alltime" value="{{ !empty(auth::user()->alltime) ? auth::user()->alltime: old('alltime') }}">
                                         @if ($errors->first('alltime'))
                                         <message class="text-danger">{{ $errors->first('alltime') }}</massage>
                                             @endif
@@ -185,7 +188,7 @@
                                             สามารถติดตอข้าพเจ้าไดที่ *</label>
                                         <input id="contacted" type="text"
                                             class="form-control {{ $errors->first('contacted') ? ' is-invalid' : '' }}"
-                                            name="contacted" value="{{ !empty($data->contacted) ? $data->contacted: old('contacted') }}">
+                                            name="contacted" value="{{ !empty(auth::user()->contacted) ? auth::user()->contacted: old('contacted') }}">
                                         @if ($errors->first('contacted'))
                                         <message class="text-danger">{{ $errors->first('contacted') }}</massage>
                                             @endif
@@ -199,7 +202,6 @@
                                 </div>
 
                             </div>
-@endforeach
                             <div class="col-md-12" style="margin-top:30px; text-align:center;">
                                 <button type="submit" class="btn btn-primary"
                                     class="btn btn-success btn-send">บันทึก</button>
