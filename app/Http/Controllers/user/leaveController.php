@@ -78,6 +78,7 @@ class leaveController extends Controller
         ->leftjoin('position',"position.id","=","users.position")
         ->leftjoin('letter',"letter.U_id","=","users.id")
         ->where('users.id',auth::user()->id)
+        ->limit(1)
         ->get();
         return view('user/forms.formleave')->with( ["data"=>$data] );
     }
