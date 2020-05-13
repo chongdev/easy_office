@@ -31,10 +31,10 @@ Route::group(['middleware' => ['auth']], function () {
 });
 //Route for admin
 Route::group(['prefix' => 'admin'], function(){
-    Route::group(['middleware' => ['admin']], function(){
+        Route::group(['middleware' => ['admin']], function(){
         Route::get('/dashboard', 'admin\AdminController@index');
         Route::resource('/manageuser', 'admin\AddUserController');
-        Route::get('/manageuser/{id}/edit','AddUserController@edit');
+        Route::get('/manageuser/{id}/edit','admin\AddUserController@edit');
         Route::get('/manageuser/delete/{id}', 'admin\AddUserController@delete');
         Route::resource('/dashboard', 'admin\adminController');
         Route::get('/dashbord/{id}/edit','admin\adminController@edit');

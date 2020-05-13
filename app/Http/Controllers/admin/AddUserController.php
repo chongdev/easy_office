@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\AdminModel AS GU;
 use App\Models\userModel AS UM;
+use App\Models\departmentModel AS DM;
+use App\Models\positionModel AS PM;
 use Illuminate\Support\Facades\Storage;
 use DB;
-
 class AddUserController extends Controller
 {
     /**
@@ -124,6 +125,7 @@ class AddUserController extends Controller
     
     return view('admin/forms.formadduser')->with(['data'=>$data,'department'=>DM::get() ,'position'=>PM::get() ]);
     }
+    
     public function delete($id)
     {
         //
